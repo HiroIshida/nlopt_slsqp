@@ -1,4 +1,4 @@
-set(SRC src/slsqp.c src/stop.c)
+set(SRC src/slsqp.c src/stop.c src/timer.c)
 include_directories(include)
 add_library(nlopt_slsqp SHARED ${SRC})
 add_library(nlopt_slsqp_static STATIC ${SRC})
