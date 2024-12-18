@@ -20,7 +20,17 @@ int main() {
     double x[2] = {2.0, 2.0};      // Initial guess
     double minf;                   // Minimum value of the objective function
 
-    nlopt_stopping stop;
+    nlopt_stopping stop; // see api/nlopt-internal.h for detail
+    stop.minf_max = -10000000;
+    stop.ftol_rel = 1e-6;
+    stop.ftol_abs = 1e-6;
+    stop.xtol_rel = 1e-6;
+    int num_evals = 0;
+    stop.nevals_p = &num_evals;
+    stop.maxeval = 1000;
+    stop.maxtime = 10000;
+    stop.start = 0;
+    stop.force_stop = 0;
 
     nlopt_result result = nlopt_slsqp(n, objective, NULL, m, NULL, p, NULL, lb, ub, x, &minf, &stop);
 
@@ -31,6 +41,5 @@ int main() {
     } else {
         printf("Optimization failed with code: %d\n", result);
     }
-
     return 0;
 }
